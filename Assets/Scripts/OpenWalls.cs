@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class OpenWalls : MonoBehaviour
 {
-    public float Lwall;
-    public float Rwall;
     public float speed = 0.001f;
     // Start is called before the first frame update
-    IEnumerator Open()
+     void Start()
     {
-       yield return new WaitForSeconds(30);
-        
-
+        StartCoroutine(Open());
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+
+    IEnumerator Open()
     {
-        transform.position += transform.right * Time.deltaTime;
+        yield return new WaitForSeconds(10);
+        while (transform.position.x <= 31)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(31, 15.19f, 15.42f), Time.deltaTime);
+            yield return null;
+        }
+       
+     
+
     }
 }
