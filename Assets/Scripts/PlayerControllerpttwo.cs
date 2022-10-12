@@ -34,7 +34,7 @@ public class PlayerControllerpttwo : MonoBehaviour
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
+         
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -45,7 +45,7 @@ public class PlayerControllerpttwo : MonoBehaviour
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * gravityValue);
+            playerVelocity.y += Mathf.Sqrt(jumpHeight *  - 3.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -71,6 +71,15 @@ public class PlayerControllerpttwo : MonoBehaviour
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
 
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+            groundedPlayer = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+            groundedPlayer = false;
+    }
 }
 
