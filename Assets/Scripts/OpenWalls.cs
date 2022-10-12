@@ -17,7 +17,7 @@ public class OpenWalls : MonoBehaviour
         yield return new WaitForSeconds(10);
         while (transform.position.x <= 31)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(31, 15.19f, 15.42f), Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(31, 15.19f, -32.3f), Time.deltaTime);
             yield return null;
         }
        
