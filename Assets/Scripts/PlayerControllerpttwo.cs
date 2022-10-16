@@ -9,7 +9,7 @@ public class PlayerControllerpttwo : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed = 6.0f;
-    private float jumpHeight = 2.0f;
+    private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
     private float MouseX;

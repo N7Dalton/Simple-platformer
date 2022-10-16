@@ -14,7 +14,7 @@ public class OpenWalls : MonoBehaviour
 
     IEnumerator Open()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(20);
         while (transform.position.x <= 31)
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(31, 15.19f, -32.3f), Time.deltaTime);
