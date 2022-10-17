@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] private Transform Player;
-    [SerializeField] private Transform RespawnPoint;   
-    
-    // Start is called before the first frame update
+    public Transform respawnpoint;
+    public Transform player;
     void OnTriggerEnter(Collider other)
     {
-        Player.transform.position = RespawnPoint.transform.position;
+        Debug.Log(other);
+        player.transform.Translate(new Vector3(0, 100, 0));
+
     }
+
+    private void Update()
+    {
+      
+    }
+
 }

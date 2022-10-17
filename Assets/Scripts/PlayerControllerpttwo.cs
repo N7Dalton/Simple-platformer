@@ -18,6 +18,8 @@ public class PlayerControllerpttwo : MonoBehaviour
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 3.0f;
     [SerializeField] bool lockCursor = true;
+    public delegate void PlayerKilled();
+    public static event PlayerKilled OnPlayerKilled;
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
@@ -45,11 +47,17 @@ public class PlayerControllerpttwo : MonoBehaviour
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight *  - 3.0f * gravityValue);
+            playerVelocity.y += Mathf.Sqrt(jumpHeight *  -3.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            die();
+        }
+
 
         UpdateMouseLook();
 
@@ -80,6 +88,15 @@ public class PlayerControllerpttwo : MonoBehaviour
     {
         if (other.gameObject.layer == 7)
             groundedPlayer = false;
+    }
+    void die()
+    {
+        Destroy(gameObject);
+
+        if(OnPlayerKilled != null)
+        {
+            OnPlayerKilled();
+        }
     }
 }
 
