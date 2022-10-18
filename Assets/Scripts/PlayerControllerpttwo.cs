@@ -9,6 +9,9 @@ public class PlayerControllerpttwo : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed = 6.0f;
+    [SerializeField] float walkSpeed = 4.0f;
+    [SerializeField] float sprintSpeed = 6.0f;
+    [SerializeField] float acceleration = 18.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
@@ -20,6 +23,7 @@ public class PlayerControllerpttwo : MonoBehaviour
     [SerializeField] bool lockCursor = true;
     public delegate void PlayerKilled();
     public static event PlayerKilled OnPlayerKilled;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
@@ -60,6 +64,7 @@ public class PlayerControllerpttwo : MonoBehaviour
 
 
         UpdateMouseLook();
+        ControlSpeed();
 
     }
 
@@ -98,5 +103,20 @@ public class PlayerControllerpttwo : MonoBehaviour
             OnPlayerKilled();
         }
     }
+
+    void ControlSpeed()
+    {
+        if(Input.GetKey(sprintKey) && groundedPlayer)
+        {
+            playerSpeed = Mathf.Lerp(playerSpeed, sprintSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            playerSpeed = Mathf.Lerp(playerSpeed, walkSpeed, acceleration * Time.deltaTime);
+        }
+    }
+
+
+
 }
 
