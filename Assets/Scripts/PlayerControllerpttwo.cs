@@ -12,6 +12,7 @@ public class PlayerControllerpttwo : MonoBehaviour
     [SerializeField] float walkSpeed = 4.0f;
     [SerializeField] float sprintSpeed = 6.0f;
     [SerializeField] float acceleration = 18.0f;
+    public float wallRunSpeed;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
@@ -67,7 +68,11 @@ public class PlayerControllerpttwo : MonoBehaviour
         ControlSpeed();
 
     }
+    public enum MovementState
+    {
+        wallrunning,
 
+    }
     void UpdateMouseLook()
     {
         //Camera crap
@@ -115,8 +120,19 @@ public class PlayerControllerpttwo : MonoBehaviour
             playerSpeed = Mathf.Lerp(playerSpeed, walkSpeed, acceleration * Time.deltaTime);
         }
     }
-
-
-
+    public MovementState state;
+    public enum Movementstate
+    {
+        wallrunning,
+    }
+    public bool wallrunning;
+    private void StateHandler()
+    {
+        if(wallrunning)
+        {
+            state = MovementState.wallrunning;
+            playerSpeed = wallRunSpeed;
+        }
+    }
 }
 
